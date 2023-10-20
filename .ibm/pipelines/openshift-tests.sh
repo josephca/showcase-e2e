@@ -4,9 +4,9 @@ set -e
 
 function cleanup {
     echo "Cleaning up before exiting"
-    helm uninstall ${RELEASE_NAME} -n ${NAME_SPACE}
+    # helm uninstall ${RELEASE_NAME} -n ${NAME_SPACE}
     oc delete namespace ${NAME_SPACE}
-    rm -rf ~/tmpbin
+    # rm -rf ~/tmpbin
 }
 
 # This will run the 'cleanup' function on exit, regardless of exit status:
