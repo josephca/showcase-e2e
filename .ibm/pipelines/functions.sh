@@ -16,22 +16,22 @@ save_logs() {
     # logged in already
     # ibmcloud login --apikey "${API_KEY}"
     # ibmcloud target -g "${IBM_RESOURCE_GROUP}"  -r "${IBM_REGION}"
-    CRN=$(ibmcloud resource service-instance ${IBM_COS} --output json | jq -r .[0].guid)
-    ibmcloud cos config crn --crn "${CRN}"
+#     CRN=$(ibmcloud resource service-instance ${IBM_COS} --output json | jq -r .[0].guid)
+#     ibmcloud cos config crn --crn "${CRN}"
 
-    ibmcloud cos upload --bucket "${IBM_BUCKET}" --key "${LOGFILE}.html" --file "/tmp/${LOGFILE}.html"
-    ibmcloud cos upload --bucket "${IBM_BUCKET}" --key "${LOGFILE}.txt" --file "/tmp/${LOGFILE}.txt"
+#     ibmcloud cos upload --bucket "${IBM_BUCKET}" --key "${LOGFILE}.html" --file "/tmp/${LOGFILE}.html"
+#     ibmcloud cos upload --bucket "${IBM_BUCKET}" --key "${LOGFILE}.txt" --file "/tmp/${LOGFILE}.txt"
 
-    BASE_URL="https://s3.${IBM_REGION}.cloud-object-storage.appdomain.cloud/${IBM_BUCKET}"
-    if [[ $RESULT == "0" ]]; then
-        STATUS="successfully"
-    else
-        STATUS="with errors"
-    fi
-    cat <<EOF | odo-robot -key-from-env-var ROBOT_KEY -pr-comment ${GIT_PR_NUMBER} -pipeline "${NAME}"
-${NAME} on commit ${GIT_COMMIT} finished ${STATUS}.
-View logs: [TXT](${BASE_URL}/${LOGFILE}.txt) [HTML](${BASE_URL}/${LOGFILE}.html)
-EOF
+#     BASE_URL="https://s3.${IBM_REGION}.cloud-object-storage.appdomain.cloud/${IBM_BUCKET}"
+#     if [[ $RESULT == "0" ]]; then
+#         STATUS="successfully"
+#     else
+#         STATUS="with errors"
+#     fi
+#     cat <<EOF | odo-robot -key-from-env-var ROBOT_KEY -pr-comment ${GIT_PR_NUMBER} -pipeline "${NAME}"
+# ${NAME} on commit ${GIT_COMMIT} finished ${STATUS}.
+# View logs: [TXT](${BASE_URL}/${LOGFILE}.txt) [HTML](${BASE_URL}/${LOGFILE}.html)
+# EOF
 }
 
 # Delete namespaces from cluster containing a configmap named config-map-for-cleanup

@@ -198,7 +198,7 @@ RESULT=${PIPESTATUS[0]}
 echo "result is ${RESULT}"
 cat /tmp/${LOGFILE}
 
-# save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
+save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
 # save_results "${PWD}/showcase-e2e-test.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 # save_results "${PWD}/test-integration.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 # save_results "${PWD}/test-e2e.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
