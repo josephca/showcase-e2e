@@ -1,5 +1,20 @@
 FROM golang:1.19
 
+ENV HELM_VERSION v3.13.1
+
+# Install dependencies
+# RUN apk add --no-cache curl tar gzip
+
+# Install Helm
+RUN curl -L "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" | tar zx \
+    && mv linux-amd64/helm /usr/bin/ \
+    && rm -rf linux-amd64
+
+# Cleanup
+# RUN apk del curl tar gzip
+
+CMD ["helm"]
+
 RUN curl -fsSL https://clis.cloud.ibm.com/install/linux | sh && \
     curl -sLO https://github.com/cli/cli/releases/download/v2.1.0/gh_2.1.0_linux_amd64.deb && \
     apt install ./gh_2.1.0_linux_amd64.deb && \
