@@ -35,7 +35,7 @@ jobs:
     # in which case 'username' and 'password' can be omitted.
     - name: Push To quay.io
       id: push-to-quay
-      if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
+      # if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' }}
       uses: redhat-actions/push-to-registry@v2
       with:
         image: ${{ steps.build-image.outputs.image }}
