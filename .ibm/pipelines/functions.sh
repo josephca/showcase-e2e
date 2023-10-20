@@ -9,6 +9,7 @@ save_logs() {
     NAME="$2"
     RESULT="$3"
 
+    echo "Inside save_logs: ${LOGFILE}, ${NAME}, ${RESULT}"
     ansi2html <"/tmp/${LOGFILE}" >"/tmp/${LOGFILE}.html"
     ansi2txt <"/tmp/${LOGFILE}" >"/tmp/${LOGFILE}.txt"
 

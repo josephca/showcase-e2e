@@ -196,6 +196,7 @@ echo "Display pods for verification..."
 
 # RESULT=${PIPESTATUS[0]}
 RESULT=$?
+echo "result is ${RESULT}"
 
 save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
 save_results "${PWD}/showcase-e2e-test.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
