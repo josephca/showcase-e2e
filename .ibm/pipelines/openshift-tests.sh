@@ -124,72 +124,73 @@ oc config set-context --current --namespace=${NAME_SPACE}
 install_helm
 
 cd $DIR
+ls -la
 
 # Change the namespace of the resources to the one namespace set above
-sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/service_account/service-account-rhdh.yaml
-sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/cluster_role_binding/cluster-role-binding-k8s.yaml
-sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/cluster_role_binding/cluster-role-binding-ocm.yaml
+# sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/service_account/service-account-rhdh.yaml
+# sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/cluster_role_binding/cluster-role-binding-k8s.yaml
+# sed -i "s/namespace:.*/namespace: $NAME_SPACE/g" $DIR/resources/cluster_role_binding/cluster-role-binding-ocm.yaml
 
-sed -i "s/backstage.io\/kubernetes-id:.*/backstage.io\/kubernetes-id: $K8S_PLUGIN_ANNOTATION/g" $DIR/resources/deployment/deployment-test-app-component.yaml
+# sed -i "s/backstage.io\/kubernetes-id:.*/backstage.io\/kubernetes-id: $K8S_PLUGIN_ANNOTATION/g" $DIR/resources/deployment/deployment-test-app-component.yaml
 
-sed -i "s/GITHUB_APP_APP_ID:.*/GITHUB_APP_APP_ID: $GITHUB_APP_APP_ID/g" $DIR/auth/secrets-rhdh-secrets.yaml
-sed -i "s/GITHUB_APP_CLIENT_ID:.*/GITHUB_APP_CLIENT_ID: $GITHUB_APP_CLIENT_ID/g" $DIR/auth/secrets-rhdh-secrets.yaml
-sed -i "s/GITHUB_APP_PRIVATE_KEY:.*/GITHUB_APP_PRIVATE_KEY: $GITHUB_APP_PRIVATE_KEY/g" $DIR/auth/secrets-rhdh-secrets.yaml
-sed -i "s/GITHUB_APP_CLIENT_SECRET:.*/GITHUB_APP_CLIENT_SECRET: $GITHUB_APP_CLIENT_SECRET/g" $DIR/auth/secrets-rhdh-secrets.yaml
-sed -i "s/GITHUB_APP_WEBHOOK_URL:.*/GITHUB_APP_WEBHOOK_URL: $GITHUB_APP_WEBHOOK_URL/g" $DIR/auth/secrets-rhdh-secrets.yaml
-sed -i "s/GITHUB_APP_WEBHOOK_SECRET:.*/GITHUB_APP_WEBHOOK_SECRET: $GITHUB_APP_WEBHOOK_SECRET/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_APP_ID:.*/GITHUB_APP_APP_ID: $GITHUB_APP_APP_ID/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_CLIENT_ID:.*/GITHUB_APP_CLIENT_ID: $GITHUB_APP_CLIENT_ID/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_PRIVATE_KEY:.*/GITHUB_APP_PRIVATE_KEY: $GITHUB_APP_PRIVATE_KEY/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_CLIENT_SECRET:.*/GITHUB_APP_CLIENT_SECRET: $GITHUB_APP_CLIENT_SECRET/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_WEBHOOK_URL:.*/GITHUB_APP_WEBHOOK_URL: $GITHUB_APP_WEBHOOK_URL/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/GITHUB_APP_WEBHOOK_SECRET:.*/GITHUB_APP_WEBHOOK_SECRET: $GITHUB_APP_WEBHOOK_SECRET/g" $DIR/auth/secrets-rhdh-secrets.yaml
 
-oc apply -f $DIR/resources/service_account/service-account-rhdh.yaml --namespace=${NAME_SPACE}
-oc apply -f $DIR/auth/service-account-rhdh-secret.yaml --namespace=${NAME_SPACE}
-oc apply -f $DIR/auth/secrets-rhdh-secrets.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/resources/service_account/service-account-rhdh.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/auth/service-account-rhdh-secret.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/auth/secrets-rhdh-secrets.yaml --namespace=${NAME_SPACE}
 
-oc apply -f $DIR/resources/deployment/deployment-test-app-component.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/resources/deployment/deployment-test-app-component.yaml --namespace=${NAME_SPACE}
 
-oc new-app https://github.com/janus-qe/test-backstage-customization-provider --namespace=${NAME_SPACE}
-oc expose svc/test-backstage-customization-provider --namespace=${NAME_SPACE}
+# oc new-app https://github.com/janus-qe/test-backstage-customization-provider --namespace=${NAME_SPACE}
+# oc expose svc/test-backstage-customization-provider --namespace=${NAME_SPACE}
 
-oc apply -f $DIR/resources/cluster_role/cluster-role-k8s.yaml 
-oc apply -f $DIR/resources/cluster_role_binding/cluster-role-binding-k8s.yaml 
-oc apply -f $DIR/resources/cluster_role/cluster-role-ocm.yaml
-oc apply -f $DIR/resources/cluster_role_binding/cluster-role-binding-ocm.yaml
+# oc apply -f $DIR/resources/cluster_role/cluster-role-k8s.yaml 
+# oc apply -f $DIR/resources/cluster_role_binding/cluster-role-binding-k8s.yaml 
+# oc apply -f $DIR/resources/cluster_role/cluster-role-ocm.yaml
+# oc apply -f $DIR/resources/cluster_role_binding/cluster-role-binding-ocm.yaml
 
 # obtain K8S_CLUSTER_NAME, K8S_CLUSTER_API_SERVER_URL and add them to secrets-rhdh-secrets.yaml
 # K8S_SERVICE_ACCOUNT_TOKEN will be replaced
-oc get secret rhdh-k8s-plugin-secret -o yaml > $DIR/auth/service-account-rhdh-token.yaml
+# oc get secret rhdh-k8s-plugin-secret -o yaml > $DIR/auth/service-account-rhdh-token.yaml
 
-TOKEN=$(grep 'token:' $DIR/auth/service-account-rhdh-token.yaml | awk '{print $2}')
+# TOKEN=$(grep 'token:' $DIR/auth/service-account-rhdh-token.yaml | awk '{print $2}')
 
-sed -i "s/K8S_SERVICE_ACCOUNT_TOKEN:.*/K8S_SERVICE_ACCOUNT_TOKEN: $TOKEN/g" $DIR/auth/secrets-rhdh-secrets.yaml
+# sed -i "s/K8S_SERVICE_ACCOUNT_TOKEN:.*/K8S_SERVICE_ACCOUNT_TOKEN: $TOKEN/g" $DIR/auth/secrets-rhdh-secrets.yaml
 
 # Cleanup temp file
-rm $DIR/auth/service-account-rhdh-token.yaml
+# rm $DIR/auth/service-account-rhdh-token.yaml
 
 # oc apply -f $DIR/auth/rhdh-quay-pull-secret.yaml --namespace=${NAME_SPACE}
 
 
 # re-apply with the updated cluster service account token
-oc apply -f $DIR/auth/secrets-rhdh-secrets.yaml --namespace=${NAME_SPACE}
-oc apply -f $DIR/resources/config_map/configmap-app-config-rhdh.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/auth/secrets-rhdh-secrets.yaml --namespace=${NAME_SPACE}
+# oc apply -f $DIR/resources/config_map/configmap-app-config-rhdh.yaml --namespace=${NAME_SPACE}
 
-add_helm_repos
+# add_helm_repos
 
-helm upgrade -i ${RELEASE_NAME} -n ${NAME_SPACE} ${HELM_REPO_NAME}/${HELM_IMAGE_NAME} -f $DIR/value_files/${HELM_CHART_VALUE_FILE_NAME} --set global.clusterRouterBase=${K8S_CLUSTER_ROUTER_BASE}
+# helm upgrade -i ${RELEASE_NAME} -n ${NAME_SPACE} ${HELM_REPO_NAME}/${HELM_IMAGE_NAME} -f $DIR/value_files/${HELM_CHART_VALUE_FILE_NAME} --set global.clusterRouterBase=${K8S_CLUSTER_ROUTER_BASE}
 
-echo "Waiting for backstage deployment..."
-sleep 60
+# echo "Waiting for backstage deployment..."
+# sleep 60
 
-echo "Display pods for verification..."
-oc get pods -n ${NAME_SPACE}
+# echo "Display pods for verification..."
+# oc get pods -n ${NAME_SPACE}
 
 # Check if Backstage is up and running
-BACKSTAGE_URL_RESPONSE=$(curl -Is "https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}" | head -n 1)
-echo "$BACKSTAGE_URL_RESPONSE"
+# BACKSTAGE_URL_RESPONSE=$(curl -Is "https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}" | head -n 1)
+# echo "$BACKSTAGE_URL_RESPONSE"
 
-cd $DIR/../../e2e-test
-yarn install
+# cd $DIR/../../e2e-test
+# yarn install
 
-Xvfb :99 &
-export DISPLAY=:99
+# Xvfb :99 &
+# export DISPLAY=:99
 
 (
   echo "Running showcase-e2e tests"
@@ -203,5 +204,5 @@ save_results "${PWD}/showcase-e2e-test.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD
 # save_results "${PWD}/test-integration.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 # save_results "${PWD}/test-e2e.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 
-pkill Xvfb
+# pkill Xvfb
 exit ${RESULT}
