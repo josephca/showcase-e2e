@@ -194,12 +194,12 @@ echo "Display pods for verification..."
   # yarn run cypress:run --config baseUrl="https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}"
 ) |& tee "/tmp/${LOGFILE}"
 
-# RESULT=${PIPESTATUS[0]}
-RESULT=$?
+RESULT=${PIPESTATUS[0]}
 echo "result is ${RESULT}"
+cat /tmp/${LOGFILE}
 
-save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
-save_results "${PWD}/showcase-e2e-test.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
+# save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
+# save_results "${PWD}/showcase-e2e-test.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 # save_results "${PWD}/test-integration.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 # save_results "${PWD}/test-e2e.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
 
