@@ -28,7 +28,7 @@ save_logs() {
         STATUS="with errors"
     fi
 
-    cat <<EOF | pr-commenter -key-from-env-var ${ROBOT_KEY} -application-id ${GITHUB_APP_PR_COMMENTER_ID} -pr-comment ${GIT_PR_NUMBER} -repository showcase-e2e -org janus-idp
+    cat <<EOF | pr-commenter -key-from-env-var=${ROBOT_KEY} -application-id=${GITHUB_APP_PR_COMMENTER_ID} -pr-comment=${GIT_PR_NUMBER} -repository=showcase-e2e -org=janus-idp
 ${NAME} on commit ${GIT_COMMIT} finished ${STATUS}.
 View logs: [TXT](${BASE_URL}/${LOGFILE}.txt) [HTML](${BASE_URL}/${LOGFILE}.html)
 EOF
