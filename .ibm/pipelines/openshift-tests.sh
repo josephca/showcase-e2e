@@ -10,7 +10,6 @@ function cleanup {
 }
 
 # This will run the 'cleanup' function on exit, regardless of exit status:
-
 # trap cleanup EXIT
 
 add_helm_repos() {
