@@ -2,16 +2,16 @@ name: Build and Push IBM Cloud Image
 on:
   push:
     branches:
-      - test-log
-    paths:
-      - ".ibm/images/Dockerfile"
-      - ".github/workflows/build-push-ibm-image.yaml"
-  pull_request:
-    branches:
       - main
     paths:
       - ".ibm/images/Dockerfile"
       - ".github/workflows/build-push-ibm-image.yaml"
+  # pull_request:
+  #   branches:
+  #     - main
+  #   paths:
+  #     - ".ibm/images/Dockerfile"
+  #     - ".github/workflows/build-push-ibm-image.yaml"
 
 jobs:
   build:
