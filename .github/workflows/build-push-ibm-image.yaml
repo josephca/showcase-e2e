@@ -2,7 +2,7 @@ name: Build and Push IBM Cloud Image
 on:
   push:
     branches:
-      - main
+      - test-log
     paths:
       - ".ibm/images/Dockerfile"
       - ".github/workflows/build-push-ibm-image.yaml"
