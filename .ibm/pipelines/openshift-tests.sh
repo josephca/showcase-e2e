@@ -10,7 +10,7 @@ function cleanup {
 }
 
 # This will run the 'cleanup' function on exit, regardless of exit status:
-trap cleanup EXIT
+# trap cleanup EXIT
 
 add_helm_repos() {
     # check installed helm version
@@ -89,7 +89,7 @@ TEST_NAME="Showcase e2e Tests"
 
 source ./.ibm/pipelines/functions.sh
 
-skip_if_only
+# skip_if_only
 
 # install ibmcloud
 install_ibmcloud
