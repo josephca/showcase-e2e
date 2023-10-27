@@ -201,5 +201,3 @@ RESULT=${PIPESTATUS[0]}
 pkill Xvfb
 
 save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
-save_results "${PWD}/test-integration.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
-save_results "${PWD}/test-e2e.xml" "${LOGFILE}" "${TEST_NAME}" "${BUILD_NUMBER}"
