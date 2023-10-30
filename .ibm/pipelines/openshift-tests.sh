@@ -85,11 +85,7 @@ install_helm() {
 
 LOGFILE="pr-${GIT_PR_NUMBER}-openshift-tests-${BUILD_NUMBER}"
 echo "Log file: ${LOGFILE}"
-TEST_NAME="Showcase e2e Tests"
-
-source ./.ibm/pipelines/functions.sh
-
-skip_if_only
+# source ./.ibm/pipelines/functions.sh
 
 # install ibmcloud
 install_ibmcloud
@@ -190,14 +186,6 @@ yarn install
 Xvfb :99 &
 export DISPLAY=:99
 
-(
-    set -e
-    echo Using PR container image: pr-${GIT_PR_NUMBER}
-    yarn run cypress:run --config baseUrl="https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}"
-) |& tee "/tmp/${LOGFILE}"
-
-RESULT=${PIPESTATUS[0]}
+yarn run cypress:run --config baseUrl="https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}"
 
 pkill Xvfb
-
-save_logs "${LOGFILE}" "${TEST_NAME}" ${RESULT}
