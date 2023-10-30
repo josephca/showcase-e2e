@@ -192,7 +192,7 @@ export DISPLAY=:99
 
 (
     set -e
-    echo Using PR container image: pr-${GIT_PR_NUMBER}
+    echo Using janus-idp/backstage-showcase:next image
     yarn run cypress:run --config baseUrl="https://${RELEASE_NAME}-${NAME_SPACE}.${K8S_CLUSTER_ROUTER_BASE}"
 ) |& tee "/tmp/${LOGFILE}"
 
