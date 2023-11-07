@@ -161,7 +161,7 @@ main() {
   echo "Log file: ${LOGFILE}"
 
   source ./.ibm/pipelines/functions.sh
-  skip_if_only
+  # skip_if_only
 
   DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
