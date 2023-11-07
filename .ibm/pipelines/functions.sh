@@ -33,7 +33,6 @@ EOF
 
 skip_if_only() {
     echo "Checking if tests need to be executed..."
-
     NAMES=$(git diff --merge-base --name-only main)
     for change in ${NAMES}; do
         skip $change
