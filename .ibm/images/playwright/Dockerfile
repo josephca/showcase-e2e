@@ -40,9 +40,9 @@ RUN curl -fsSL https://clis.cloud.ibm.com/install/linux | sh && \
     curl -sLO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && \
     chmod +x kubectl && \
     mv kubectl /usr/local/bin/ && \
-    curl -sLO https://raw.githubusercontent.com/cptmorgan-rh/install-oc-tools/master/install-oc-tools.sh > /dev/null && \
-    chmod +x install-oc-tools.sh && \
-    ./install-oc-tools.sh --latest 4.11 && \
+    # curl -sLO https://raw.githubusercontent.com/cptmorgan-rh/install-oc-tools/master/install-oc-tools.sh > /dev/null && \
+    # chmod +x install-oc-tools.sh && \
+    # ./install-oc-tools.sh --latest 4.11 && \
     apt-get update -y && \
     apt-get install -y sshpass jq colorized-logs && \
     rm -rf /var/lib/apt/lists/*
