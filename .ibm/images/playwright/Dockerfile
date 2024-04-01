@@ -6,6 +6,10 @@ ENV CI=1 \
   _MITSHM=0 \
   NODE_PATH=/usr/local/lib/node_modules
 
+# Define Helm and OpenShift CLI (oc) versions
+ENV HELM_VERSION="v3.12.3"
+ENV OC_VERSION="4.14.3"
+
 ARG CI_XBUILD
 
 # should be root user
@@ -61,6 +65,17 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+# Install Helm
+RUN curl -fsSL -o /tmp/helm.tar.gz "https://get.helm.sh/helm-${HELM_VERSION}-linux-amd64.tar.gz" \
+    && tar -xzvf /tmp/helm.tar.gz -C /tmp \
+    && mv /tmp/linux-amd64/helm /usr/local/bin/helm \
+    && rm -rf /tmp/*
+
+# Install OpenShift CLI (oc)
+RUN curl -fsSL -o /tmp/openshift-client-linux.tar.gz "https://mirror.openshift.com/pub/openshift-v4/clients/ocp/${OC_VERSION}/openshift-client-linux-${OC_VERSION}.tar.gz" \
+    && tar -xzvf /tmp/openshift-client-linux.tar.gz -C /usr/local/bin oc kubectl \
+    && rm -rf /tmp/*
+
 # Set environment variables to make Go work correctly
 ENV GOPATH /go
 ENV PATH $GOPATH/bin:/usr/local/go/bin:$PATH
@@ -69,3 +84,4 @@ RUN go install github.com/kadel/pr-commenter@latest && \
     ibmcloud plugin install -f cloud-object-storage && \
     ibmcloud plugin install -f kubernetes-service
 
+WORKDIR /tmp/
